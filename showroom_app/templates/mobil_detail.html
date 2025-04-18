@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Detail Mobil - {{ mobil.merk }} {{ mobil.model }}{% endblock %}
+
+{% block content %}
+<!-- Messages -->
+{% if messages %}
+<div class="mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4>{{ mobil.merk }} {{ mobil.model }} ({{ mobil.tahun }})</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="iu col-md-6">
+                <h5>Informasi Utama</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">ID: {{ mobil.id }}</li>
+                    <li class="list-group-item">Harga Dasar: Rp. {{ mobil.harga_dasar|floatformat:0|intcomma }}</li>
+                    <li class="list-group-item">Pinjaman Bank: Rp. {{ mobil.pinjaman_bank|default:"-"|floatformat:0|intcomma }}</li>
+                    <li class="list-group-item">Suku Bunga: {{ mobil.suku_bunga|default:"-" }}%</li>
+                </ul>
+                
+                <h5 class="mt-4">Perhitungan</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">Cicilan Bulanan Tenor 1 Tahun: Rp. {{ cicilan_satu|default:"-"|floatformat:0|intcomma }}</li>
+		    <li class="list-group-item">Cicilan Bulanan Tenor 3 Tahun: Rp. {{ cicilan_tiga|default:"-"|floatformat:0|intcomma }}</li>
+		    <li class="list-group-item">Cicilan Bulanan Tenor 5 Tahun: Rp. {{ cicilan_lima|default:"-"|floatformat:0|intcomma }}</li>
+                    <li class="list-group-item">Total Biaya Service: Rp. {{ total_service|default:0|floatformat:0|intcomma }}</li>
+                    <li class="list-group-item list-group-item-info">HPP: Rp. {{ hpp|default:"Tidak dapat dihitung"|floatformat:0|intcomma }}</li>
+                </ul>
+            </div>
+            
+            <div class="rs col-md-6">
+                <h5>Riwayat Service</h5>
+                {% if services %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Deskripsi</th>
+                                <th>Biaya</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in services %}
+                            <tr>
+                                <td>{{ service.tanggal_service|date:"d M Y" }}</td>
+                                <td>{{ service.deskripsi }}</td>
+                                <td>Rp. {{ service.biaya|floatformat:0|intcomma }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted">Belum ada riwayat service</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="{% url 'mobil_list' %}" class="btn btn-secondary">Kembali</a>
+            <a href="{% url 'service_create' mobil.pk %}" class="btn btn-success">Tambah Service</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

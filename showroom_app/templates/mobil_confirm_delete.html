@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Hapus Mobil - {{ mobil.merk }} {{ mobil.model }}{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">
+            <i class="bi bi-exclamation-triangle"></i> Konfirmasi Penghapusan
+        </h4>
+    </div>
+    
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <h5 class="alert-heading">Apakah Anda yakin ingin menghapus mobil ini?</h5>
+            <hr>
+            <p class="mb-0">
+                <strong>{{ mobil.merk }} {{ mobil.model }}</strong> (Tahun: {{ mobil.tahun }})<br>
+            </p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-grid gap-2 d-md-block">
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Ya, Hapus
+                </button>
+                <a href="{% url 'mobil_detail' mobil.pk %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Batal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if mobil %}Edit {{ mobil.merk }}{% else %}Tambah Mobil Baru{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card shadow">
+    <div class="card-header {% if mobil %}bg-warning{% else %}bg-success{% endif %} text-white">
+        <h4 class="mb-0">
+            {% if mobil %}
+                <i class="bi bi-pencil-square"></i> Edit {{ mobil.merk }} {{ mobil.model }}
+            {% else %}
+                <i class="bi bi-plus-circle"></i> Tambah Mobil Baru
+            {% endif %}
+        </h4>
+    </div>
+    
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Merk Mobil</label>
+                        {{ form.merk }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Model</label>
+                        {{ form.model }}
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Tahun Produksi</label>
+                        {{ form.tahun }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Harga Dasar</label>
+                        <div class="input-group">
+                            <span class="input-group-text">Rp</span>
+                            {{ form.harga_dasar }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Financing Section -->
+            <div class="border-top pt-3 mt-4">
+                <h5 class="text-primary mb-3">
+                    <i class="bi bi-bank2"></i> Pembiayaan Bank (Opsional)
+                </h5>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Jumlah Pinjaman</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                {{ form.pinjaman_bank }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Suku Bunga Tahunan</label>
+                            <div class="input-group">
+                                {{ form.suku_bunga }}
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <small class="form-text text-muted">Contoh: 5.5 untuk 5.5%</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn {% if mobil %}btn-warning{% else %}btn-success{% endif %}">
+                    <i class="bi bi-save"></i> Simpan
+                </button>
+                <a href="{% if mobil %}{% url 'mobil_detail' mobil.pk %}{% else %}{% url 'mobil_list' %}{% endif %}" 
+                   class="btn btn-secondary">
+                    Batal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

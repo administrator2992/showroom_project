@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Tambah Service{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>Tambah Service untuk {{ mobil.merk }} {{ mobil.model }}</h4>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Tanggal Service</label>
+                {{ form.tanggal_service }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Deskripsi</label>
+                {{ form.deskripsi }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Biaya</label>
+                {{ form.biaya }}
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{% url 'mobil_detail' mobil.pk %}" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

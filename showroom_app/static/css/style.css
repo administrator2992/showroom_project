@@ -1,0 +1,78 @@
+.main-card {
+            min-height: 90vh;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+}
+
+.search-box {
+    max-width: 500px;
+}
+
+.table-responsive {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  background: #212529;
+  z-index: 1;
+}
+
+@media (max-width: 768px){
+    .table-responsive-md {
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table td, .table th{
+        min-width: 120px;
+        white-space: nowrap;
+    }
+
+    .table thead th {
+        white-space: nowrap;
+        min-width: 150px; /* Adjust based on content */
+        font-size: 0.9em;
+      }
+      
+      .table tbody td {
+        font-size: 0.85em;
+      }
+        
+    .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .rs {
+        margin-top: 1rem;
+    }
+
+    .search-box {
+        max-width: 350px;
+}
+}
+
+@media (max-width: 320px) {
+    .container {
+        min-width: 320px;
+        overflow-x: auto;
+    }
+    
+    body:after {
+        content: "Screen too small (min 320px required)";
+        display: block;
+        padding: 20px;
+        background: #ff4444;
+        color: white;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+}

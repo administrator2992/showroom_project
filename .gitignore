@@ -1,0 +1,7 @@
+*.pem
+.env.prod
+showroom_app/__pycache__/
+showroom_project/__pycache__/
+showroom_app/migrations
+.DS_Store
+*.csv
