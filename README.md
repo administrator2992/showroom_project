@@ -88,6 +88,12 @@ mkcert -key-file key.pem -cert-file cert.pem <your_ip>
 ```
 **Recommendation**: use nginx for web service (public domain needed) (future feature)
 
+## Update gunicorn command in Dockerfile.prod
+```bash
+# at last line
+CMD ["gunicorn", "showroom_project.wsgi:application", "--bind", "0.0.0.0:443", "--certfile", "cert.pem", "--keyfile", "key.pem"]
+```
+
 ## Q/A and Bug report
 If you have any questions or bug reports, please ask/report through the Issue feature. The title of the question should be `Q/A—Your Question`. The title of bug report should be `BUG-Bug Outlines`. Capture all error logs or submit the log file. Explain briefly.
 
