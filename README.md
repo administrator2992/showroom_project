@@ -89,6 +89,6 @@ mkcert -key-file key.pem -cert-file cert.pem <your_ip>
 **Recommendation**: use nginx for web service (public domain needed) (future feature)
 
 ## Q/A and Bug report
-If you have any questions or bug reports, please ask/report through the Issue feature. The title of the question should be `Q/A—Your Question`. The title of bug report should be `BUG-Bug Outlines`.
+If you have any questions or bug reports, please ask/report through the Issue feature. The title of the question should be `Q/A—Your Question`. The title of bug report should be `BUG-Bug Outlines`. Capture all error logs or submit the log file. Explain briefly.
 
 Feel free to contribute guys ☻
