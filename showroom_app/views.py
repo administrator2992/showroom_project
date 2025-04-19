@@ -75,6 +75,13 @@ def mobil_create(request):
     if request.method == 'POST':
         form = MobilForm(request.POST)
         if form.is_valid():
+            merk = form.cleaned_data['merk']
+            model = form.cleaned_data['model']
+            tahun = form.cleaned_data['tahun']
+            
+            if Mobil.objects.filter(merk=merk, model=model, tahun=tahun).exists():
+                messages.error(request, "Mobil dengan kombinasi Merk, Model, dan Tahun ini sudah ada!")
+                return redirect('mobil_create')
             new_mobil = form.save()
             messages.success(request, 'Mobil berhasil ditambahkan!')
             return redirect('mobil_detail', pk=new_mobil.pk)
